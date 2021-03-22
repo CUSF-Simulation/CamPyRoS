@@ -27,3 +27,4 @@ output.json
 *.NC
 *.anl
 data/pyro.json
+pyro_venv/
