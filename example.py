@@ -38,7 +38,7 @@ C_DAMP_ROLL = 0
 
 # Import drag coefficients from RASAero II
 aero_data = pyro.AeroData.from_rasaero(
-    "data/Martlet4RASAeroII.CSV", REF_AREA, C_DAMP_PITCH, C_DAMP_ROLL
+    "data/Martlet4RasAeroII.CSV", REF_AREA, C_DAMP_PITCH, C_DAMP_ROLL
 )
 # aero_data.show_plot()   #Show plots of how the program interpreted the data, so you can visually check if it's correct
 
@@ -87,7 +87,7 @@ launch_site = pyro.LaunchSite(
     run_date="20210216",
 )  # Use this version if you don't want to use the real wind (e.g. to test something else)
 
-parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.CSV")
+parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.csv")
 mach_array = parachute_Data["Mach_Number"].to_numpy()
 main_cd_array = parachute_Data["Main_Cd"].to_numpy()
 dro_cd_array = parachute_Data["Drogue_Cd"].to_numpy()
