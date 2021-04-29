@@ -10,6 +10,13 @@ CamPyRoS (Cambridge Python Rocketry Simulator) is a Python package which provide
 
 For a fuller documatation see the docs [here](https://campyros.readthedocs.io/)
 
+```diff
+- Warning:
+```
+> The URL formatting for the NOAA wind data has recently changed causing the wind modual to work even less so it is currently compleltly dissfunctional at this time.
+A ![new version of the wind modual is in progress](https://github.com/CUspaceflight/Campyros/tree/new-wind) in the and will by my top priority after my exams. If you would like to attempt to deal with this mess please have a look and message (Jago) if you need help.
+
+
 ## Getting started
 Currently not all dependancies are supported by the same install methods so the easiest install doesn't contain the full functionality. To install the core library:
 
