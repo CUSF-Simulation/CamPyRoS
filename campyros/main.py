@@ -222,8 +222,8 @@ class LaunchSite:
         lat,
         variable_wind=True,
         default_wind=[0, 0, 0],
-        launch_datetime=(date.today()-timedelta(days=2)).strftime("%Y%m%d %H:%M"),
-        cache_Wind=False
+        launch_datetime=(date.today() - timedelta(days=2)).strftime("%Y%m%d %H:%M"),
+        cache_Wind=False,
     ):
         self.rail_length = rail_length
         self.rail_yaw = rail_yaw
@@ -235,7 +235,7 @@ class LaunchSite:
             variable=variable_wind,
             default=default_wind,
             datetime=launch_datetime,
-            cache=cache_Wind
+            cache=cache_Wind,
         )
 
 

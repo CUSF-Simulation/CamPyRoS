@@ -1,6 +1,6 @@
 import unittest
 import sys, os, json
-from datetime import date,timedelta,datetime
+from datetime import date, timedelta, datetime
 
 sys.path.append(
     "/".join(
@@ -204,11 +204,13 @@ class ExampleTest(unittest.TestCase):
         )
 
     def test_stats(self):
-        with open("campyros/tests/test_stats.json",'r') as f:
-            stat_dat=json.load(f)
-        stat_dat["launch_site"]["launch_datetime"]=(date.today()-timedelta(days=2)).strftime("%Y%m%d %H:%M")
-        with open("campyros/tests/test_stats.json",'w') as f:
-            json.dump(stat_dat,f)
+        with open("campyros/tests/test_stats.json", "r") as f:
+            stat_dat = json.load(f)
+        stat_dat["launch_site"]["launch_datetime"] = (
+            date.today() - timedelta(days=2)
+        ).strftime("%Y%m%d %H:%M")
+        with open("campyros/tests/test_stats.json", "w") as f:
+            json.dump(stat_dat, f)
         stats_model = stats.StatisticalModel("campyros/tests/test_stats.json")
         ran = stats_model.run_model(test_mode=True, num_cpus=1)
         print(ran)
@@ -223,15 +225,16 @@ class ExampleTest(unittest.TestCase):
         )
 
     def test_wind(self):
-        wind1=wind.Wind((date.today()-timedelta(days=1)).strftime("%Y%m%d %H:%M"))
-        wind1_val=wind1.get_wind(239,923,292728238)
-        self.assertIsInstance(wind1_val,type(np.array([0.0,0.0])))
-        self.assertEqual(3,len(wind1_val))
+        wind1 = wind.Wind((date.today() - timedelta(days=1)).strftime("%Y%m%d %H:%M"))
+        wind1_val = wind1.get_wind(239, 923, 292728238)
+        self.assertIsInstance(wind1_val, type(np.array([0.0, 0.0])))
+        self.assertEqual(3, len(wind1_val))
 
-        wind2=wind.Wind(variable=False)
-        wind2_val=wind2.get_wind(-239,-923,-292728238)
-        self.assertEqual(0,wind2_val[0])
-        self.assertEqual(0,wind2_val[1])
+        wind2 = wind.Wind(variable=False)
+        wind2_val = wind2.get_wind(-239, -923, -292728238)
+        self.assertEqual(0, wind2_val[0])
+        self.assertEqual(0, wind2_val[1])
+
 
 if __name__ == "__main__":
     unittest.main()

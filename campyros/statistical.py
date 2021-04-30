@@ -250,7 +250,7 @@ class StatisticalModel:
             * np.random.normal(1, self.launch_site_vars["lat"][1]),
             variable_wind=bool(self.launch_site_vars["variable_wind"]),
             launch_datetime=self.launch_site_vars["launch_datetime"],
-            cache_Wind=True
+            cache_Wind=True,
         )
 
         ###Parachute
