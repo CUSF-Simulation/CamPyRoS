@@ -82,9 +82,8 @@ launch_site = pyro.LaunchSite(
     alt=10,
     longi=0.1,
     lat=52.1,
-    variable_wind=False,
-    fast_wind=True,
-    run_date="20210216",
+    variable_wind=True,
+    cache_Wind=True
 )  # Use this version if you don't want to use the real wind (e.g. to test something else)
 
 parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.csv")

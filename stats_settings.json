@@ -1,6 +1,6 @@
 {
     "name":"stats_example",
-    "itterations":1000,
+    "itterations":10,
     "launch_site":{
         "rail_length":[10,0.01],
         "rail_yaw":[0,0.03],
@@ -9,9 +9,7 @@
         "long":[0.1160127,0.01],
         "lat":[52.2079404,0.01],
         "fast_wind":1,
-        "run_date":"20210206",
-        "run_time":"00",
-        "run_plus_time":"000",
+        "launch_datetime":"20210428 15:00",
         "variable_wind":1
     },
     "aero_file":"data/Martlet4RasAeroII.CSV",

@@ -1,5 +1,6 @@
 import unittest
-import sys, os
+import sys, os, json
+from datetime import date,timedelta,datetime
 
 sys.path.append(
     "/".join(
@@ -8,7 +9,7 @@ sys.path.append(
 )
 import campyros as pyro
 from campyros import statistical as stats
-from campyros import new_wind as wind
+from campyros import wind
 import csv
 import time
 import numpy as np
@@ -114,8 +115,6 @@ launch_site = pyro.LaunchSite(
     longi=0.1,
     lat=52.1,
     variable_wind=False,
-    fast_wind=True,
-    run_date="20210216",
 )  # Use this version if you don't want to use the real wind (e.g. to test something else)
 
 parachute = pyro.Parachute(
@@ -138,7 +137,7 @@ martlet4 = pyro.Rocket(
     alt_poll_interval=1,
     parachute=parachute,
 )
-"""
+
 run = martlet4.run(debug=False)
 
 test_output = pyro.from_json("campyros/tests/test.json")
@@ -168,10 +167,10 @@ for ind, ev in enumerate(run.events):
         parachute_ind_run = ind
     if "Cleared rail" in ev:
         rail_ind_run = ind
-"""
+
 
 class ExampleTest(unittest.TestCase):
-    """def test_time(self):
+    def test_time(self):
         self.assertAlmostEqual(run_time // 5, run.time.max() // 5, places=0)
 
     def test_apogee(self):
@@ -205,6 +204,11 @@ class ExampleTest(unittest.TestCase):
         )
 
     def test_stats(self):
+        with open("campyros/tests/test_stats.json",'r') as f:
+            stat_dat=json.load(f)
+        stat_dat["launch_site"]["launch_datetime"]=(date.today()-timedelta(days=2)).strftime("%Y%m%d %H:%M")
+        with open("campyros/tests/test_stats.json",'w') as f:
+            json.dump(stat_dat,f)
         stats_model = stats.StatisticalModel("campyros/tests/test_stats.json")
         ran = stats_model.run_model(test_mode=True, num_cpus=1)
         print(ran)
@@ -216,16 +220,16 @@ class ExampleTest(unittest.TestCase):
             True,
             ran,
             msg="Statistical model run failed, no further information automatically available",
-        )"""
+        )
 
     def test_wind(self):
         wind1=wind.Wind((date.today()-timedelta(days=1)).strftime("%Y%m%d %H:%M"))
-        wind1_val=wind1.get(239,923,292728238)
-        self.assertIsInstance(wind1_val,type((0.0,0.0)))
-        self.assertEqual(2,len(wind1_val))
+        wind1_val=wind1.get_wind(239,923,292728238)
+        self.assertIsInstance(wind1_val,type(np.array([0.0,0.0])))
+        self.assertEqual(3,len(wind1_val))
 
         wind2=wind.Wind(variable=False)
-        wind2_val=wind2.get(-239,-923,-292728238)
+        wind2_val=wind2.get_wind(-239,-923,-292728238)
         self.assertEqual(0,wind2_val[0])
         self.assertEqual(0,wind2_val[1])
 

@@ -42,7 +42,7 @@ import scipy.integrate as integrate
 from scipy.spatial.transform import Rotation
 import numexpr as ne
 
-from datetime import date
+from datetime import date, timedelta
 from ambiance import Atmosphere
 
 from .constants import r_earth, ang_vel_earth, f
@@ -222,11 +222,8 @@ class LaunchSite:
         lat,
         variable_wind=True,
         default_wind=[0, 0, 0],
-        wind_data_loc="data/wind/gfs",
-        run_date=date.today().strftime("%Y%m%d"),
-        forcast_time="00",
-        forcast_plus_time="000",
-        fast_wind=False,
+        launch_datetime=(date.today()-timedelta(days=2)).strftime("%Y%m%d %H:%M"),
+        cache_Wind=False
     ):
         self.rail_length = rail_length
         self.rail_yaw = rail_yaw
@@ -235,15 +232,10 @@ class LaunchSite:
         self.longi = longi
         self.lat = lat
         self.wind = Wind(
-            longi,
-            lat,
             variable=variable_wind,
             default=default_wind,
-            data_loc=wind_data_loc,
-            run_date=run_date,
-            forcast_time=forcast_time,
-            forcast_plus_time=forcast_plus_time,
-            fast=fast_wind,
+            datetime=launch_datetime,
+            cache=cache_Wind
         )
 
 
