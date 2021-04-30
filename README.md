@@ -1,5 +1,5 @@
 # CamPyRoS - A 6DOF Rocket Trajectory Simulator
-[![DOI](https://zenodo.org/badge/308847422.svg)](https://zenodo.org/badge/latestdoi/308847422) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![DOI](https://zenodo.org/badge/308847422.svg)](https://zenodo.org/badge/latestdoi/308847422) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![Testing](https://github.com/cuspaceflight/CamPyRoS/actions/workflows/testcase.yml/badge.svg)](https://github.com/cuspaceflight/CamPyRoS/actions/workflows/testcase.yml)
 
 CamPyRoS (Cambridge Python Rocketry Simulator) is a Python package which provides fully featured rocket trajectory simulation including features like:
 - 6 degrees of freedom (3 translational, 3 rotational)
@@ -15,27 +15,11 @@ Currently not all dependancies are supported by the same install methods so the 
 
 `pip install git+https://github.com/cuspaceflight/CamPyRoS.git`  
 
-The "wind" and "statistics" modules will not run. Statistics has a dependancy not fully supported by windows, to install it:
+Statistics has a dependancy not fully supported by windows, to install it:
 
 `pip install ray` on most platforms, for Windows problems see [here](https://docs.ray.io/en/master/installation.html).
 
-Wind depends on a library called iris which can only be installed with conda:
-
-`conda install iris, iris_grib`
-
-> Note: after some more testing this won't work for anyone on Windows, I am in the process fo sorting this out (the problem is a codec dependancy which there is no way for us to fix) by writing an library to read the other GFS distrobution method, see [gfspy](https://github.com/jagoosw/gfspy). You can still run and contribute without using the wind module. If you really want to use the wind module please [email](jagoosw@protonmail.com) or message me and we can try and sort out access to something remote you can use to run it. 
-
-This may then demand you install another library when you try to run it:
-
-`pip install eccodes-python`
-
-Alternativly you can download this repository and move it to either your system path or somewhere you will exclusivly use it from then:
-
-`conda env create -f enviroment.yml -n <name>`
-
-`conda activate <name>`
-
-From within the downloaded folder.
+If you don't install this the statistics module will run but only single threaded which will be *extremely* slow.
 
 ## Usage
 

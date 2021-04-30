@@ -63,18 +63,6 @@ mass_model.add_solidfuel(
 """Create the other objects needed to initialise the Rocket object"""
 pulsar = pyro.Motor.from_novus("novus_sim_6.1/motor_out.csv", pos=ROCKET_L)
 
-"""
-launch_site = pyro.LaunchSite(rail_length=10, 
-                                    rail_yaw=0, 
-                                    rail_pitch=0, 
-                                    alt=1, 
-                                    longi=0.1160127, 
-                                    lat=52.2079404, 
-                                    variable_wind=True,
-                                    forcast_plus_time="016",
-                                    run_date="20201216",
-                                    fast_wind=False)
-"""
 launch_site = pyro.LaunchSite(
     rail_length=5,
     rail_yaw=0,
@@ -84,7 +72,7 @@ launch_site = pyro.LaunchSite(
     lat=52.1,
     variable_wind=True,
     cache_Wind=True
-)  # Use this version if you don't want to use the real wind (e.g. to test something else)
+) 
 
 parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.csv")
 mach_array = parachute_Data["Mach_Number"].to_numpy()
