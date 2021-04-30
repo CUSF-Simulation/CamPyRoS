@@ -122,18 +122,6 @@ class StatisticalModel:
         self.enviromental = data["enviromental"]
         self.thrust_error = data["thrust_error"]
         self.mass_vars = data["mass"]
-
-        self.wind_base = Wind(
-            self.launch_site_vars["long"][0],
-            self.launch_site_vars["lat"][0],
-            variable=bool(self.launch_site_vars["variable_wind"]),
-            run_date=self.launch_site_vars["run_date"],
-            forcast_time=self.launch_site_vars["run_time"],
-            forcast_plus_time=self.launch_site_vars["run_plus_time"],
-            fast=self.launch_site_vars["fast_wind"],
-        )
-
-        print(data["motor_file"])
         self.motor_data = load_motor(data["motor_file"])
         self.motor_base = Motor.from_novus(data["motor_file"], pos=data["motor_pos"])
 
@@ -155,8 +143,6 @@ class StatisticalModel:
         motor = copy.copy(self.motor_base)
         thrust_e = np.random.normal(1, self.thrust_error["magnitude"])
         motor.thrust_array = [t * thrust_e for t in motor.thrust_array]
-
-        wind = copy.copy(self.wind_base)  # Wind variability coming soon
 
         dry_mass = self.mass_vars["dry_mass"][0] * np.random.normal(
             1, self.mass_vars["dry_mass"][1]
@@ -263,10 +249,8 @@ class StatisticalModel:
             lat=self.launch_site_vars["lat"][0]
             * np.random.normal(1, self.launch_site_vars["lat"][1]),
             variable_wind=bool(self.launch_site_vars["variable_wind"]),
-            run_date=self.launch_site_vars["run_date"],
-            forcast_plus_time=self.launch_site_vars["run_plus_time"],
-            forcast_time=self.launch_site_vars["run_time"],
-            fast_wind=bool(self.launch_site_vars["fast_wind"]),
+            launch_datetime=self.launch_site_vars["launch_datetime"],
+            cache_Wind=True,
         )
 
         ###Parachute

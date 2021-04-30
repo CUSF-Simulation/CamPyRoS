@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="CamPyRoS",
-    version="1.0",
+    version="1.1",
     author="Jago Strong-Wright & Daniel Gibbons",
     author_email="jagoosw@protonmail.com",
     packages=find_packages(),
@@ -20,7 +20,8 @@ setup(
         "gas_dynamics",
         "pandas",
         "numexpr",
-        "requests"
+        "requests",
+        "getgfs>=1.0.0"
     ],
     description="Cambridge Python Rocketry Simulator",
 )

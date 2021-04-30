@@ -7,3 +7,4 @@ gas_dynamics
 pandas
 numexpr
 requests
+getgfs>=1.0.0

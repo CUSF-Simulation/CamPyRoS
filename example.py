@@ -38,7 +38,7 @@ C_DAMP_ROLL = 0
 
 # Import drag coefficients from RASAero II
 aero_data = pyro.AeroData.from_rasaero(
-    "data/Martlet4RASAeroII.CSV", REF_AREA, C_DAMP_PITCH, C_DAMP_ROLL
+    "data/Martlet4RasAeroII.CSV", REF_AREA, C_DAMP_PITCH, C_DAMP_ROLL
 )
 # aero_data.show_plot()   #Show plots of how the program interpreted the data, so you can visually check if it's correct
 
@@ -63,18 +63,6 @@ mass_model.add_solidfuel(
 """Create the other objects needed to initialise the Rocket object"""
 pulsar = pyro.Motor.from_novus("novus_sim_6.1/motor_out.csv", pos=ROCKET_L)
 
-"""
-launch_site = pyro.LaunchSite(rail_length=10, 
-                                    rail_yaw=0, 
-                                    rail_pitch=0, 
-                                    alt=1, 
-                                    longi=0.1160127, 
-                                    lat=52.2079404, 
-                                    variable_wind=True,
-                                    forcast_plus_time="016",
-                                    run_date="20201216",
-                                    fast_wind=False)
-"""
 launch_site = pyro.LaunchSite(
     rail_length=5,
     rail_yaw=0,
@@ -82,12 +70,11 @@ launch_site = pyro.LaunchSite(
     alt=10,
     longi=0.1,
     lat=52.1,
-    variable_wind=False,
-    fast_wind=True,
-    run_date="20210216",
-)  # Use this version if you don't want to use the real wind (e.g. to test something else)
+    variable_wind=True,
+    cache_Wind=True
+) 
 
-parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.CSV")
+parachute_Data = pd.read_csv("data/Sample_Parachute_Cd.csv")
 mach_array = parachute_Data["Mach_Number"].to_numpy()
 main_cd_array = parachute_Data["Main_Cd"].to_numpy()
 dro_cd_array = parachute_Data["Drogue_Cd"].to_numpy()
